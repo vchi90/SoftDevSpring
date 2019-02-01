@@ -1,3 +1,8 @@
+//Vincent Chi
+//SoftDev2 pd7
+//K00 -- I See a Red Door...
+//2019-01-30 (Due)
+
 var c = document.getElementById("slate");
 var ctx = c.getContext("2d");
 

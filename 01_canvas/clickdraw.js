@@ -1,37 +1,39 @@
-var c = document.getElementById("slate");
-var ctx = c.getContext("2d");
+//Team Brobdingnagian Jiayang Chen, Vincent Chi
+//SoftDev2 pd7
+//K01 -- ...and I want to Paint It Better
+//2019-02-01 (Due)
 
-var clear = document.getElementById("clear");
+var canvas = document.getElementById('slate');
+var ctx = canvas.getContext('2d');
 
-clear.addEventListener('click', function(){
-  ctx.clearRect( 0, 0, 600, 600);
+document.getElementById('clear').addEventListener('click', function() {
+    //Clears the canvas from x,y with a rectangle with width,height
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
-c.addEventListener('click', draw);
 
-var boxOrDot = document.getElementById("draw");
+var state = 0;
 
-var state = "Rectangle";
-
-boxOrDot.addEventListener('click', function() {
-  if (state == "Rectangle") {
-	  state = "Dot";
-  }
-  else {
-	  state = "Rectangle";
-  }
+document.getElementById('switch').addEventListener('click', function() {
+    //Toggle the states 0 -> 1; 1 -> 0
+    state = (state + 1) % 2;
 });
 
-function draw(e) {
-  e.preventDefault();
-  var x = e.offsetX;
-  var y = e.offsetY;
-  if (state == "Rectangle"){
-    ctx.fillRect( x - 25, y - 50, 50, 100);
-  }
-  else{
-    ctx.beginPath();
-    ctx.ellipse( x, y, 20, 20, 0, 0, 2 * Math.PI);
-    ctx.fill()
-  }
-};
+canvas.addEventListener('click', function(e) {
+    e.preventDefault();
+    //OffsetX and y are the x and y coords of the cursor with respect to canvas
+    var x = e.offsetX;
+    var y = e.offsetY;
+    if (state == 1) {
+	//Draws a square with side length 50
+        ctx.fillRect(x-25,y-25,50,50);
+    } else {
+        //Begin a path defined by the ellipse and FILLED later
+        ctx.beginPath();
+	//Draws a circle with radius 10
+	//x,y,major,minor,rotation,startAngle, endAngle
+        ctx.ellipse(x,y,10,10,0,0,Math.PI * 2);
+        ctx.fill();
+    }
+
+});
