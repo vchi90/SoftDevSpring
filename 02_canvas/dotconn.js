@@ -9,22 +9,30 @@ var ctx = canvas.getContext('2d');
 document.getElementById('clear').addEventListener('click', function() {
     //Clears the canvas from x,y with a rectangle with width,height
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //Resets the path
+    ctx.beginPath();
 });
 
-var lastXcoor = 0;
-var lastYcoor = 0;
 
 canvas.addEventListener('click', function(e) {
-    //e.preventDefault();
-    ctx.beginPath();
     //OffsetX and y are the x and y coords of the cursor with respect to canvas
     var x = e.offsetX;
     var y = e.offsetY;
-	//Draws a circle with radius 10
-	//x,y,major,minor,rotation,startAngle, endAngle
-        ctx.lineTo(x,y)
-        ctx.ellipse(x,y,30,30,0,0,Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
+
+
+    //Draws a line to the new cursor location
+    ctx.lineTo(x,y);
+    ctx.stroke();
+
+    //Draws a "dot" with radius 30
+    //x,y,major,minor,rotation,startAngle, endAngle
+    ctx.beginPath();
+    ctx.ellipse(x,y,30,30,0,0,Math.PI * 2);
+    ctx.fill();
+
+    //Marks where the last click was, for future clicks
+    ctx.beginPath();
+    ctx.moveTo(x,y);
 
 });
