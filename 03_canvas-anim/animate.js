@@ -10,7 +10,7 @@ var dotButton = document.getElementById('circle');
 var stopButton = document.getElementById('stop');
 
 var requestID = 0;
-var radius = 30;
+var radius = 0;
 var growing = true;
 
 //.addEventListener('click', draw)
@@ -18,18 +18,54 @@ var growing = true;
 
 function drawDot() {
     //ctx.scale(10, 3);
+    clear();
+
+    if (radius == c.width / 2){
+        growing = false;
+    }
+    if (radius == 0){
+        growing = true;
+    }
+
 
     ctx.beginPath();
     ctx.arc(c.width / 2, c.height / 2,
            radius, 0, 2 *Math.PI);
+    clear();
     ctx.stroke();
     ctx.fill();
 
-    window.requestAnimationFrame(drawDot);
+    if (growing){
+        radius = radius + 1;
+    }
+    else{
+        radius = radius - 1;
+    }
+
+    requestID = window.requestAnimationFrame(drawDot);
 }
 
-dotButton.addEventListener('click', drawDot);
+var clear = function (e) {
+    console.log("clearing");
+    ctx.clearRect(0, 0, c.width, c.height);
+};
 
+var stopIt = function() {
+    window.cancelAnimationFrame(requestID);
+    requestID = 0;
+};
+
+dotButton.addEventListener('click', function(e){
+
+  if (requestID == 0){
+    drawDot();
+  }
+  else{
+    e.preventDefault();
+  }
+
+});
+stopButton.addEventListener('click', stopIt);
 
 // window.requestAnimationFrame() moves to next frame
 // syntax: requestAnimationFrame(callback)
