@@ -19,12 +19,12 @@ def changeIP():
 
 @app.route("/search", methods=['GET', 'POST'])
 def search():
-    if (request.args.get("type") == "year"):
-	    return render_template("results.html", content = search_year(request.args.get("argument"))
-	elif (request.args.get("type") == "category"):
-	    return render_template("results.html", content = search_category(request.args.get("argument"))
-    else:
-	    return render_template("results.html", content = search_num_lauretes(request.args.get("argument"))
-		
+	if (request.form.get("type") == "year"):
+	    return render_template("result.html", content = mdb.search_year(request.form.get("argument")))
+	elif (request.form.get("type") == "category"):
+	    return render_template("result.html", content = mdb.search_category(request.form.get("argument")))
+	else:
+	    return render_template("result.html", content = mdb.search_num_lauretes(request.form.get("argument")))
+
 app.debug = True
 app.run()
