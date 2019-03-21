@@ -3,19 +3,10 @@
 //SoftDev2 pd7
 //2019-03-19
 
-var data = [
-  {name: "Locke",    value:  4},
-  {name: "Reyes",    value:  8},
-  {name: "Ford",     value: 15},
-  {name: "Jarrah",   value: 16},
-  {name: "Shephard", value: 23},
-  {name: "Kwon",     value: 42}
-];
-
 var width = 420,
     barHeight = 20;
 
-var x = d3.scaleLinear()
+var x = d3.scale.linear()
     .range([0, width]);
 
 var chart = d3.select(".chart")
