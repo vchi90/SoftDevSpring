@@ -1,16 +1,21 @@
+//Team Swaggasaurus Vincent Chi & Ray Onishi
+//K13 -- Diving Deeper Into D3
+//SoftDev2 pd7
+//2019-03-19
+
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var xValue = function(d) { return d.Calories;},
-    x_scale = d3.scaleLinear().range([0, width]),
-    x_map = function(d) { return x_scale(xValue(d));},
-    x_axis = d3.axisBottom(x_scale);
+    xScale = d3.scaleLinear().range([0, width]),
+    xMap = function(d) { return xScale(xValue(d));},
+    xAxis = d3.axisBottom(xScale);
 
 var yValue = function(d) { return d["Fat"];},
-    y_scale = d3.scaleLinear().range([height, 0]),
-    y_map = function(d) { return y_scale(yValue(d));},
-    y_axis = d3.axisLeft(y_scale);
+    yScale = d3.scaleLinear().range([height, 0]),
+    yMap = function(d) { return yScale(yValue(d));},
+    yAxis = d3.axisLeft(yScale);
 
 
 var c_value = function(d) { return d.Manufacturer;},
@@ -30,15 +35,15 @@ d3.csv("cereal.csv").then(function(data) {
     d["Fat"] = +d["Fat"];
   });
 
-  x_scale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
-  y_scale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
+  xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
+  yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
   
   // x
   svg.append("g")
       .attr("class", "x axis")
       .style("fill","black")
       .attr("transform", "translate(30," + height + ")")
-      .call(x_axis)
+      .call(xAxis)
   svg.append("text")
       .attr("class", "x label")
       .attr("x", width / 2)
@@ -52,7 +57,7 @@ d3.csv("cereal.csv").then(function(data) {
       .attr("class", "y axis")
       .style("fill","black")
       .attr("transform", "translate(30,0)")
-      .call(y_axis)
+      .call(yAxis)
   svg.append("text")
       .attr("class", "x label")
       .attr("transform","rotate(-90)")
@@ -67,7 +72,7 @@ d3.csv("cereal.csv").then(function(data) {
     .enter().append("circle")
       .attr("class", "dot")
       .attr("r", 3.5)
-      .attr("cx", x_map)
-      .attr("cy", y_map)
+      .attr("cx", xMap)
+      .attr("cy", yMap)
       .style("fill", function(d) { return color(cValue(d));})
 });
