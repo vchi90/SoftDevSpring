@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- link to CDN, allows for access to all content without need for local copy -->
+      <!-- includes code for css files -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+   </head>
+   <style>
+   h4 {
+     color: green
+   }
+   .code{
+     color: red
+   }
+   .output{
+     color: blue
+   }
+   </style>
+   <body>
+
+      <div class="container-fluid">
+
+         <div class="jumbotron">
+            <div class = "text-center">
+               <h1>Shellscripting</h1>
+               <h3>By Team Poro Peeps</h3>
+               <h3>Dennis Chen and Vincent Chi</h3>
+            </div>
+         </div>
+      </div>
+      <nav class="navbar navbar-expand-sm bg-light navbar-light">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <a class="navbar-brand" href="- ">Shellscripting</a>
+            </div>
+            <div class = "collapse navbar-collapse" id = "collapsibleNavbar">
+               <ul class="navbar-nav">
+                  <li class = "nav-item"><a class = "nav-link" href="#gen">Introduction</a></li>
+				  <li class = "nav-item"><a class = "nav-link" href="#use">Uses</a></li>
+				  <li class = "nav-item"><a class = "nav-link" href="#adv">Advantages</a></li>
+				  <li class = "nav-item"><a class = "nav-link" href="#dav">Disadvantages</a></li>
+                  <li class = "nav-item"><a class = "nav-link" href="#var">Variables</a></li>
+                  <li class = "nav-item"><a class = "nav-link" href="#ari">Arithmetic</a></li>
+                  <li class = "nav-item"><a class = "nav-link" href="#con">Constants & Floats</a></li>
+                  <li class = "nav-item"><a class = "nav-link" href="#pri">Printing on Multiple Lines</a></li>
+                  <li class = "nav-item"><a class = "nav-link" href="#fun">Functions</a></li>
+                  <li class = "nav-item"><a class = "nav-link" href="#cond">Conditionals & Loops</a></li>
+                  <li class = "nav-item"><a class = "nav-link" href="#arr">Arrays</a></li>
+				  <li class = "nav-item"><a class = "nav-link" href="#sor">Sources and More Info</a></li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+	  
+      <div class="container"><br><br>
+        <div class = "introduction" id = "gen">
+          <p>
+            <h2>What is Shell Scripting</h2>
+			<div><br>
+			A shell script is the terminology for a computer program that can be run by the Unix shell. (BASH CSH KSH)<br>
+			- What you can run shell scripts, you can run in the terminal.<br><br>
+			Automated execution of code in an operating system shell.<br>
+			Other references depend on operating systems:<br>
+			- Batch Files (MSDos-Win95)<br>
+			- Command Procedures (OpenVMS)<br><br>
+			Runs on non-extension files.<br>
+			</div><br>
+          </p>
+        </div>
+		<div class = "uses" id = "use">
+          <p>
+            <h2>Uses</h2>
+			<div><br>
+			Program command line segments in chunks, creating shortcuts for shell commands.<br>
+			Allows a convenient method to execute system commands.<br>
+			- Specifications and post-processing properties of the shell all apply naturally while still behaving as a normal Unix command.<br>
+			</div><br>
+          </p>
+        </div>
+		<div class = "advantages" id = "adv">
+          <p>
+            <h2>Advantages</h2>
+			<div><br>
+			The commands & syntax are exactly the same as what you would input into a terminal.<br>
+			Writing a shell script for a program is generally quicker than equivalent code for other languages.<br>
+			Easy file selection, debugging, etc.<br>
+			</div><br>
+          </p>
+        </div>
+		<div class = "disadvantages" id = "dav">
+          <p>
+            <h2>Disadvantages</h2>
+			<div><br>
+			Be careful!<br>
+			Commands such as rm, cp, mv differ from other commands with just a single letter.<br>
+			With typos, you can *accidentally* break your system.<br>
+			Likewise, * / vs */ <br>
+			Shell commands execute slowly.<br>
+			Compatibility with different platforms.<br>
+			</div><br>
+          </p>
+        </div>
+        <div class = "variables" id = "var">
+          <p>
+            <h2>Variables</h2>
+            <pre><code>
+            <div class = "code">
+            num1=21 - There can't be whitespace on either side of the = sign
+            str="asd"
+            echo "11 + 10 = $num1" - Put a $ in front of a variable when it's in a string
+            </div>
+            <h4>Output</h4>
+            <div class = "output">
+            <samp>11 + 10 = 21</samp>
+            </div>
+            </code></pre>
+          </p>
+        </div>
+        <div class = "arithmetic" id = "ari">
+          <p>
+            <h2>Arithmetic</h2>
+            <pre><code>
+            <div class = "code">
+            num1=21
+            num2=3
+            num3=$((num2 + num1)) - To perform arithmetic, you need $(())
+            num4=$((num2 - num1))
+            num5=$((num2 * num1))
+            num6=$((num1 / num2))
+            echo $num3
+            echo $num4
+            echo $num5
+            echo $num6
+            </div>
+            <h4>Output</h4>
+            <div class = "output">
+            <samp>24
+            -18
+            63
+            7</samp>
+            </div>
+            </code></pre>
+          </p>
+        </div>
+        <div class = "constants" id = "con">
+          <p>
+            <h2>Constants</h2>
+            <pre><code>
+            <div class = "code">
+            declare -r NUM2=3
+            NUM2=4
+            </div>
+            </code></pre>
+            <h2>Adding floats</h2>
+            <pre><code>
+            <div class = "code">
+            - Use Python to add floats
+            num7=1.2
+            num8=3.4
+            echo $((num7 + num8)) - Will give you an invalid arithmetic operator error
+            num9=$(python -c "print $num7+$num8") - $() executes the command in the ()
+            echo $num9
+            </div>
+            <h4>Output</h4>
+            <div class = "output">
+            <samp>bash: 1.2: syntax error: invalid arithmetic operator (error token is ".2")
+            4.6
+            </samp>
+            </div>
+            </code></pre>
+          </p>
+        </div>
+        <div class = "printing" id = "pri">
+          <p>
+            <h2>Printing multiple lines using a here script</h2>
+            <pre><code>
+            <div class = "code">
+            cat << END - If you write <<- instead of <<, then bash will ignore the leading tabs
+            This text
+            prints on
+            many lines
+            END
+            </div>
+            <h4>Output</h4>
+            <div class = "output">
+            <samp>This text
+            prints on
+            many lines
+            </samp>
+            </div>
+            </code></pre>
+          </p>
+        </div>
+        <div class = "functions" id = "fun">
+          <p>
+            <h2>Functions</h2>
+            <pre><code>
+            <div class = "code">
+            getDate()
+            {
+                echo -n "Today's date is: "
+                date - Gives the current date
+            }
+            getDate
+
+            computeSum()
+            {
+                local num1=$1 - $1 indicates the 1st positional parameter
+                local num2=$2
+                local sum=$((num1 + num2))
+                echo $sum
+            }
+            sum=$(computeSum 4 2)
+            echo $sum
+            </div>
+            <h4>Output</h4>
+            <div class = "output">
+            <samp>
+            Today's date is: Sun, Apr 28, 2019  2:01:33 PM (Replace with the current date)
+            6
+            </samp>
+            </div>
+            </code></pre>
+          </p>
+        </div>
+        <div class = "conditionals" id = "cond">
+          <p>
+            <h2>Conditionals</h2>
+            <pre><code>
+            <div class = "code">
+            sum=19
+            if [ $((9 + 10)) -eq $sum ] - There needs to be a space after the left bracket and before the right bracket
+            then
+                echo "9 + 10 = $sum"
+            elif [ $((9 + 10)) -lt $sum ] - Other inequality symbols include ne,gt,ge(not equal, greater than, greater than or equal to)
+            then
+                echo "9 + 10 < $sum"
+            else
+                echo "9 + 10 > $sum"
+            fi
+
+            if ((sum == 19)) - Another format for conditionals
+            then
+                echo "Your number equals 19"
+            fi
+
+            if (( ((9 < 10)) && ((11 > 10)) )) - In the previous format, it would be -o or -a
+            then
+                echo "10 is greater than 9 and less than 11"
+            fi
+            </div>
+            <h4>Output</h4>
+            <div class = "output">
+            <samp>
+            9 + 10 = 19
+            Your number equals 19
+            10 is greater than 9 and less than 11
+            </samp>
+            </div>
+            </code></pre>
+            <h2>File Testing</h2>
+            <pre><code>
+            <div class = "code">
+            if [ -f "./test" ] - Checks if test is a file
+            then
+                echo "test is a file"
+            elif [ -d "./test"] - Checks if test is a directory
+            then
+                echo "test is a directory"
+            fi
+            </div>
+            <h4>Output</h4>
+            <div class = "output">
+            <samp>test is a file</samp>
+            </div>
+            </code></pre>
+            <h2>While Loop</h2>
+            <pre><code>
+            <div class = "code">
+            num=10
+            while [ $num -ge 0 ]
+            do - While loops and for loops start with a "do"
+                echo "$num"
+                num=$((num - 1))
+            done - While loops and for loops need to be ended with a "done"
+            </div>
+            <h4>Output</h4>
+            <div class = "output">
+            <samp>
+            10
+            9
+            8
+            7
+            6
+            5
+            4
+            3
+            2
+            1
+            0
+            </samp>
+            </div>
+            </code></pre>
+            <h2>For Loop</h2>
+            <pre><code>
+            <div class = "code">
+            for ((i = 0; i<10; i+=1))
+            do
+                echo $i
+            done
+            </div>
+            <h4>Output</h4>
+            <div class = "output">
+            <samp>
+            0
+            1
+            2
+            3
+            4
+            5
+            6
+            7
+            8
+            9
+            </samp>
+            </div>
+            </code></pre>
+          </p>
+        </div>
+        <div class = "arrays" id = "arr">
+          <p>
+            <h2>Arrays- Bash arrays can only have one dimension</h2>
+            <pre><code>
+            <div class = "code">
+            nums=(1.2 1.3 1.4 1.5) - Instantiate arrays with elements inside ()
+            echo "${nums[0]}" - Prints the first element in the array
+            nums[4]=1.6 -  Adds number to array
+            nums+=(1.7 1.8) -  Adds a group to the array
+            echo "${nums[@]}" -  Prints all the values in the array
+            echo "${- nums[@]}" - Gives the length of the array
+            unset 'nums[0]' -  Deletes element
+            echo "${nums[@]}"
+            unset nums -  Deletes array
+            echo "${nums[@]}"
+            </div>
+            <h4>Output</h4>
+            <div class = "output">
+            <samp>
+            1.2
+            1.2 1.3 1.4 1.5 1.6 1.7 1.8
+            7
+            1.3 1.4 1.5 1.6 1.7 1.8
+            (There is supposed to be a blank here)
+            </samp>
+            </div>
+            </code></pre>
+          </p>
+        </div>
+		<div class = "sources" id = "sor">
+          <p>
+            <h2>Want to Learn More?</h2>
+			<div><br>
+			<a href="http://www.newthinktank.com/2016/06/shell-scripting-tutorial/">New Think Tank</a><br>
+			<a href="https://www.shellscript.sh/">Shell Script</a><br>
+			<a href="linuxcommand.org/lc3_writing_shell_scripts.php">Linux Command</a><br>
+			<a href="https://www.geeksforgeeks.org/introduction-linux-shell-shell-scripting/">Geeks For Geeks</a><br>
+			</div><br>
+          </p>
+        </div>
+	  </div>
+   </body>
+</html>
