@@ -20,7 +20,9 @@ print(greet())
 def memoize(f):
     memo = {}
     def helper(x):
-        return 
+        if (x not in memo.keys()):
+            memo[x] = f(x)
+        memo[x]
     return helper
 
 @memoize
